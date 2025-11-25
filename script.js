@@ -12,6 +12,27 @@ async function cargasTodas() {
     todasLasGasolineras = datos.ListaEESSPrecio;
 
     console.log(todasLasGasolineras)
+    cargarProvincias()
+   
 }
 
+//2) FUNCION PARA CARGAR PROVINCIAS
+function cargarProvincias(){
+    const select = document.getElementById("provincia");
+
+    const provincias = [...new Set(todasLasGasolineras.map(g => g.Provincia))].sort();
+
+    provincias.forEach(p =>{
+        const op = document.createElement("option");
+        op.value = p;
+        op.textContent = p;
+        select.appendChild(op);
+
+    });
+}
+
+
+
+
+// CARGAR TODO AL INICIO
 cargasTodas()

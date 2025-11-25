@@ -9,7 +9,32 @@
     <title>API-GASOLINERA</title>
 </head>
 <body>
-    <h1>API-GASOLINERA</h1>
+    <h1>Gasolineras España⛽</h1>
+
+    <div class="main-layout">
+        <!-- COLUMNA IZQUIERDA -->
+        <div class="filtros">
+            <label>Provincia:</label>
+            <select id="provincia"></select>
+
+            <label>Municipio:</label>
+            <select id="municipio"></select>
+
+            <label>Combustible:</label>
+            <select id="combustible">
+                <option value="Precio Gasolina 95 E5">Gasolina 95</option>
+                <option value="Precio Gasolina 98 E5">Gasolina 98</option>
+                <option value="Precio Gasoleo A">Gasóleo A</option>
+            </select>
+
+            <label>
+                <input type="checkbox" id="abiertas"> Solo abiertas
+            </label>
+        </div>
+
+
+        <!-- COLUMNA DERECHA -->
+        <div id="lista"></div>
 </body>
 </html>
 

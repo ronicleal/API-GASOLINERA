@@ -23,7 +23,22 @@ async function cargarProvincias() {
 
 //3-Funcion para cargar los municipios
 async function cargarMunicipios(idProvincia){
+    const select = document.getElementById("municipio");
+    select.innerHTML = ""; 
+
+    const respuesta = await fetch(`${urlMunicipios}${idProvincia}`);
+    const datos = await respuesta.json();
+    console.log(datos)
     
+
+    datos.forEach(municipio => {
+        const op = document.createElement("option");
+        op.value = municipio.Municipio;
+        op.textContent = municipio.Municipio;
+        select.appendChild(op);
+    })
+
+
 
 }
 
@@ -34,4 +49,7 @@ cargarProvincias()
 
 
 //Eventos
-document.getElementById("provincia").addEventListener("change")
+document.getElementById("provincia").addEventListener("change", (e) =>{
+    const idProvincia = e.target.value;
+    cargarMunicipios(idProvincia);
+})

@@ -1,13 +1,14 @@
-
 <!DOCTYPE html>
 <html lang='en'>
+
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <link rel='stylesheet' href='style.css'>
-   <script src='script.js' defer></script> 
+    <script src='script.js' defer></script>
     <title>API-GASOLINERA</title>
 </head>
+
 <body>
     <h1>Gasolineras España⛽</h1>
 
@@ -16,19 +17,21 @@
         <div class="filtros">
             <label>Provincia:</label>
             <select id="provincia">
-            <option value="">Seleccione Provincia</option>
+                <option value="">Seleccione Provincia</option>
             </select>
 
             <label>Municipio:</label>
             <select id="municipio">
-            <option value="">Seleccione Municipio</option>
+                <option value="">Seleccione Municipio</option>
             </select>
 
             <label>Combustible:</label>
             <select id="combustible">
+                <option value="todos">Todos</option>
                 <option value="Precio Gasolina 95 E5">Gasolina 95</option>
-                <option value="Precio Gasolina 98 E5">Gasolina 98</option>
+                <option value="Precio Gasolina 98">Gasolina 98</option>
                 <option value="Precio Gasoleo A">Gasóleo A</option>
+                <option value="Precio GLP">GLP</option>
             </select>
 
             <label>
@@ -40,5 +43,5 @@
         <!-- COLUMNA DERECHA -->
         <div id="lista"></div>
 </body>
-</html>
 
+</html>

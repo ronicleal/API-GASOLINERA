@@ -26,7 +26,9 @@ async function cargarProvincias() {
 //3-Funcion para cargar los municipios
 async function cargarMunicipios(idProvincia){
     const selectMun = document.getElementById("municipio");
-    selectMun.innerHTML = ""; 
+    selectMun.innerHTML = "<option value=''>--Selecciona Municipio--</option>"; 
+
+    if (!idProvincia) return;
 
     const respuesta = await fetch(`${urlMunicipios}${idProvincia}`);
     const datos = await respuesta.json();
@@ -49,20 +51,31 @@ async function cargarMunicipios(idProvincia){
 async function buscarGasolineras() {
     const provincia = document.getElementById("provincia").value;
     const municipio = document.getElementById("municipio").value;
-    const combustible = document.getElementById("combustible").value;
+    const combustible = document.getElementById("abiertas").checked;
 
-    if (!provincia || !municipio || !combustible) return;
+    if (!municipio) return;
+
 
     const respuesta = await fetch(`${urlGasolinerasMunicipio}${municipio}`);
     const datos = await respuesta.json();
-
     const lista = datos.ListaEESSPrecio;
 
-    // Filtro por combustible: solo las que tengan precio válido
-    const filtradas = lista.filter(g => g[combustible] && g[combustible] !== "");
+    // Filtrar por combustible
+     if (combustible !== "todos") {
+        lista = lista.filter(g => g[combustible] && g[combustible] !== "");
+    }
 
-    mostrarGasolineras(filtradas, combustible);
+    // Filtrar por abiertas 24h
+    if (soloAbiertas) {
+        lista = lista.filter(g => g.Horario.includes("24H"));
+    }
+
+     mostrarGasolineras(lista, combustible);
 }
+
+
+
+
 
 function mostrarGasolineras(lista, combustible) {
     const cont = document.getElementById("lista");

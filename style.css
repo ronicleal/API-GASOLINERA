@@ -33,7 +33,7 @@ body {
 
 .filtros {
   width: 280px;
-  background: #ffffff;
+  background:#d9d6d6;
   border: 1px solid #c4c4c4;
   padding: 20px;
   border-radius: 4px;
@@ -67,7 +67,7 @@ input[type="checkbox"] {
 
 #lista {
   flex: 1;
-  background: #ffffff;
+  background:#d9d6d6;
   padding: 20px;
   border-radius: 4px;
   border: 1px solid #c4c4c4;

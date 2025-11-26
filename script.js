@@ -37,7 +37,7 @@ async function cargarMunicipios(idProvincia){
 
     datos.forEach(municipio => {
         const op = document.createElement("option");
-        op.value = municipio.Municipio;
+        op.value = municipio.IDMunicipio;
         op.textContent = municipio.Municipio;
         selectMun.appendChild(op);
     })
@@ -51,14 +51,15 @@ async function cargarMunicipios(idProvincia){
 async function buscarGasolineras() {
     const provincia = document.getElementById("provincia").value;
     const municipio = document.getElementById("municipio").value;
-    const combustible = document.getElementById("abiertas").checked;
+    const combustible = document.getElementById("combustible").value;
+    const soloAbiertas = document.getElementById("abiertas").checked; 
 
     if (!municipio) return;
 
 
-    const respuesta = await fetch(`${urlGasolinerasMunicipio}${municipio}`);
-    const datos = await respuesta.json();
-    const lista = datos.ListaEESSPrecio;
+    const resp = await fetch(`${urlGasolinerasMunicipio}${(municipio)}`);
+    const datos = await resp.json();
+    let lista = datos.ListaEESSPrecio;
 
     // Filtrar por combustible
      if (combustible !== "todos") {
@@ -76,16 +77,24 @@ async function buscarGasolineras() {
 
 
 
-
+//5- Mostrar gasolineras en pantalla
 function mostrarGasolineras(lista, combustible) {
     const cont = document.getElementById("lista");
     cont.innerHTML = "";
 
+    if (lista.length === 0) {
+        cont.innerHTML = "<p>No se encontraron gasolineras.</p>";
+        return;
+    }
+
+
     lista.forEach(g => {
+        const precio = combustible === "todos" 
+            ? "Varía según tipo" 
+            : g[combustible] + " €/L";
+
         const card = document.createElement("div");
         card.className = "card";
-
-        const precio = g[combustible] || "No disponible";
 
         card.innerHTML = `
             <h3>${g.Rótulo}</h3>
@@ -101,16 +110,12 @@ function mostrarGasolineras(lista, combustible) {
 }
 
 
-
-
-//Cargar al inicio
-cargarProvincias()
-
-
 //Eventos
 document.getElementById("provincia").addEventListener("change", (e) =>{
-    const idProvincia = e.target.value;
-    cargarMunicipios(idProvincia);
+    cargarMunicipios(e.target.value);
 })
 
 document.getElementById("buscar").addEventListener("click", buscarGasolineras);
+
+//Cargar al inicio
+cargarProvincias()

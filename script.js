@@ -1,7 +1,6 @@
 //1-Guardo en variables las url de provincia
 const urlProvincias = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/Listados/Provincias/"
 const urlMunicipios = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/Listados/MunicipiosPorProvincia/"
-const urlGasolinerasProvincia = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroProvincia/";
 const urlGasolinerasMunicipio = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroMunicipio/";
 
 
@@ -49,7 +48,6 @@ async function cargarMunicipios(idProvincia){
 
 //4-Funcion para filtrar gasolineras por provincia + municipio + combustible
 async function buscarGasolineras() {
-    const provincia = document.getElementById("provincia").value;
     const municipio = document.getElementById("municipio").value;
     const combustible = document.getElementById("combustible").value;
     const soloAbiertas = document.getElementById("abiertas").checked; 
@@ -93,19 +91,18 @@ function mostrarGasolineras(lista, combustible) {
             ? "Varía según tipo" 
             : g[combustible] + " €/L";
 
-        const card = document.createElement("div");
-        card.className = "card";
+        const div = document.createElement("div");
 
-        card.innerHTML = `
-            <h3>${g.Rótulo}</h3>
-            <p><strong>Dirección:</strong> ${g.Dirección}</p>
-            <p><strong>Localidad:</strong> ${g.Localidad}</p>
-            <p><strong>Provincia:</strong> ${g.Provincia}</p>
-            <p><strong>Horario:</strong> ${g.Horario}</p>
-            <p class="precio"><strong>${combustible}:</strong> ${precio} €/L</p>
+        div.innerHTML = `
+            <p><strong>${g.Rótulo}</strong></p>
+            Dirección: ${g.Dirección}<br>
+            Localidad: ${g.Localidad}<br>
+            Provincia: ${g.Provincia}<br>
+            Horario: ${g.Horario}<br>
+            Precio: ${combustible}: ${precio} €/L<br>
         `;
 
-        cont.appendChild(card);
+        cont.appendChild(div);
     });
 }
 
